@@ -4,15 +4,21 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
-
+import "swiper/css";
+import "swiper/css/navigation";
 import "./index.scss";
 
 // import required modules
-import { Autoplay, Pagination } from "swiper/modules";
+import { Autoplay, Pagination,Navigation } from "swiper/modules";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export default function Carousel({ numberOfslide, category }) {
+export default function Carousel({
+  numberOfslide,
+  category,
+  isUseNavigation = false,
+  title,
+}) {
   const [movies, setMovies] = useState([]);
 
   const fetchMovie = async () => {
@@ -27,8 +33,11 @@ export default function Carousel({ numberOfslide, category }) {
     fetchMovie();
   });
   return (
-    <>
+    <div className={`carousel ${numberOfslide > 1 ? "multi-item" : ""}`}>
+    {/* chỉ show title khi và chỉ khi có title nếu title == null =>ko show title */}
+    {title && <h1>{title}</h1>}
       <Swiper
+        navigation={isUseNavigation}
         slidesPerView={numberOfslide}
         spaceBetween={10}
         autoplay={{
@@ -36,8 +45,8 @@ export default function Carousel({ numberOfslide, category }) {
           disableOnInteraction: false,
         }}
         pagination={true}
-        modules={[Pagination, Autoplay]}
-        className="carousel"
+        modules={[Pagination, Autoplay, Navigation]}
+        
       >
         {movies
           .filter((movie) => movie.category === category)
@@ -47,6 +56,6 @@ export default function Carousel({ numberOfslide, category }) {
             </SwiperSlide>
           ))}
       </Swiper>
-    </>
+    </div>
   );
 }
