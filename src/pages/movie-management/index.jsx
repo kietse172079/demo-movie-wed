@@ -1,13 +1,32 @@
-import { Button, Form, Image, Input, Modal, Select, Table, Upload } from "antd";
+import {
+  Button,
+  Form,
+  Image,
+  Input,
+  Modal,
+  Popconfirm,
+  Select,
+  Table,
+  Upload,
+} from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import { useForm } from "antd/es/form/Form";
 import uploadFile from "../../utils/upload";
+import "./index.scss";
+// import { render } from "react-dom";
 function MovieManagement() {
   const [form] = useForm();
   const [dataSource, setDataSource] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const handleDeleteMovie = async (id) => {
+    await axios.delete(
+      `https://662b9b40de35f91de158d81b.mockapi.io/Movie/${id}`
+    );
+    const listAfterDelete = dataSource.filter((movie) => movie.id !== id);
+    setDataSource(listAfterDelete);
+  };
   const columns = [
     {
       title: "Name",
@@ -21,7 +40,28 @@ function MovieManagement() {
       key: "poster_path",
       render: (poster_path) => <Image src={poster_path} width={200} />,
     },
+
+    {
+      title: "Actions",
+      dataIndex: "id",
+      key: "id",
+      render: (id) => (
+        <>
+          <Popconfirm
+            title="Delete the task"
+            description="Are you sure to delete this task?"
+            onConfirm={() => handleDeleteMovie(id)}
+            // onCancel={cancel}
+            okText="Yes"
+            cancelText="No"
+          >
+            <Button type="primary">Delete</Button>,
+          </Popconfirm>
+        </>
+      ),
+    },
   ];
+
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [fileList, setFileList] = useState([]);
@@ -32,6 +72,7 @@ function MovieManagement() {
       reader.onload = () => resolve(reader.result);
       reader.onerror = (error) => reject(error);
     });
+
   const handlePreview = async (file) => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj);
@@ -102,7 +143,7 @@ function MovieManagement() {
   }, []);
 
   return (
-    <div>
+    <div className="movie-management">
       <Button type="primary" onClick={handleShowModal}>
         Add new movie
       </Button>
