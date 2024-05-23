@@ -10,10 +10,10 @@ function HomePage() {
         numberOfslide={4}
         category={"Comedy"}
         isUseNavigation
-        title="Horor Movie"
+        title="Comedy Movie"
       />
-      <Carousel numberOfslide={4} category={"Horror"} isUseNavigation />
-      <Carousel numberOfslide={4} category={"Action"} isUseNavigation />
+      <Carousel numberOfslide={4} category={"Horror"} isUseNavigation title="Horror Movie" />
+      <Carousel numberOfslide={4} category={"Action"} isUseNavigation title="Action Movie"/>
     </div>
   );
 }
