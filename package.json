@@ -10,14 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "antd": "^5.16.4",
-    "axios": "^1.6.8",
-    "firebase": "^10.11.1",
+    "antd": "^5.19.3",
+    "axios": "^1.7.2",
+    "firebase": "^10.12.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.23.0",
-    "sass": "^1.77.0",
-    "swiper": "^10.0.0"
+    "react-router-dom": "^6.25.1",
+    "sass": "^1.77.8",
+    "swiper": "^10.3.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

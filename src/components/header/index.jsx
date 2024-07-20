@@ -27,11 +27,12 @@ function Header() {
           <li>
             <Link to="/">Home</Link>
           </li>
-          <li>
-            <Link to="/">Movies</Link>
-          </li>
+
           <li>
             <Link to="/movie-management">Movie Management</Link>
+          </li>
+          <li>
+            <Link to="/login">Login</Link>
           </li>
           <li onClick={() => setShowSearch(true)}>
             <SearchOutlined />
