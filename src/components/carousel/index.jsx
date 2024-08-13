@@ -9,7 +9,7 @@ import "swiper/css/navigation";
 import "./index.scss";
 
 // import required modules
-import { Autoplay, Pagination,Navigation } from "swiper/modules";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -23,7 +23,8 @@ export default function Carousel({
 
   const fetchMovie = async () => {
     const response = await axios.get(
-      "https://662b9b40de35f91de158d81b.mockapi.io/Movie"
+      // "https://662b9b40de35f91de158d81b.mockapi.io/Movie"
+      "https://6627a8d9b625bf088c092f46.mockapi.io/Movies"
     );
 
     console.log(response.data);
@@ -34,8 +35,8 @@ export default function Carousel({
   });
   return (
     <div className={`carousel ${numberOfslide > 1 ? "multi-item" : ""}`}>
-    {/* chỉ show title khi và chỉ khi có title nếu title == null =>ko show title */}
-    {title && <h1>{title}</h1>}
+      {/* chỉ show title khi và chỉ khi có title nếu title == null =>ko show title */}
+      {title && <h1>{title}</h1>}
       <Swiper
         navigation={isUseNavigation}
         slidesPerView={numberOfslide}
@@ -46,7 +47,6 @@ export default function Carousel({
         }}
         pagination={true}
         modules={[Pagination, Autoplay, Navigation]}
-        
       >
         {movies
           .filter((movie) => movie.category === category)

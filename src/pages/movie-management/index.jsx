@@ -22,7 +22,7 @@ function MovieManagement() {
   const [isOpen, setIsOpen] = useState(false);
   const handleDeleteMovie = async (id) => {
     await axios.delete(
-      `https://662b9b40de35f91de158d81b.mockapi.io/Movie/${id}`
+      `https://6627a8d9b625bf088c092f46.mockapi.io/Movies/${id}`
     );
     const listAfterDelete = dataSource.filter((movie) => movie.id !== id);
     setDataSource(listAfterDelete);
@@ -102,7 +102,7 @@ function MovieManagement() {
 
   async function fetchMovies() {
     const response = await axios.get(
-      "https://662b9b40de35f91de158d81b.mockapi.io/Movie"
+      "https://6627a8d9b625bf088c092f46.mockapi.io/Movies"
     );
 
     console.log(response.data);
@@ -127,7 +127,7 @@ function MovieManagement() {
     const url = await uploadFile(values.poster_path.file.originFileObj);
     values.poster_path = url;
 
-    axios.post("https://662b9b40de35f91de158d81b.mockapi.io/Movie", values);
+    axios.post("https://6627a8d9b625bf088c092f46.mockapi.io/Movies", values);
 
     setDataSource([...dataSource, values]);
 
